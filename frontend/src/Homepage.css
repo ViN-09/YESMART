@@ -1,0 +1,78 @@
+#Homepage{
+   width: 100vw;
+   height: 100vh;
+    background-color: whitesmoke;
+    display: grid;
+    grid-template-rows: 92% 8%;
+
+    #logo-box{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    img{
+        width: auto;
+        height: 100%;
+    }
+    
+    #menu-box {
+        display: grid;
+        grid-template-columns: auto 1fr auto auto;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+      }
+    
+      #menu-box button {
+        padding: 10px 14px;
+        cursor: pointer;
+        border-radius: 10px;
+        color: #eaeaea;
+        text-decoration: none;
+      
+        transition:
+          background-color 0.25s ease,
+          transform 0.2s ease,
+          color 0.2s ease,
+          box-shadow 0.25s ease;
+      }
+      
+      /* hover elegan */
+      #menu-box button:hover {
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        transform: translateY(-1px);
+        color: #ffffff;
+      }
+      
+      /* icon sedikit lebih hidup */
+      #menu-box button i {
+        transition: transform 0.2s ease;
+      }
+      
+      #menu-box button:hover i {
+        transform: scale(1.1);
+      }
+      
+      
+      /* icon kiri */
+      #menu-box button:first-child {
+        justify-self: start;
+        margin-left: 20px;
+        background-color: red;
+        color: whitesmoke;
+        font-weight: bolder;
+      }
+      
+      /* dua menu kanan */
+      #menu-box button:nth-child(2),
+      #menu-box button:nth-child(3) {
+        justify-self: end;
+        background-color: blue;
+        color: whitesmoke;
+        font-weight: bolder;
+      }
+      
+}
