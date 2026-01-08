@@ -1,0 +1,29 @@
+/* ==============================
+   ROOT VARIABLES (WARNA)
+   ============================== */
+   :root {
+    /* Backgrounds */
+    --bg-primary: #d0e4e8;   /* biru soft / light background */
+    --bg-dark: #34596a;      /* biru tua / untuk area gelap */
+    --bg-darker: #2b4a57;    /* lebih gelap untuk layer gelap */
+    --bg-light: #f6f5f2;     /* off-white / card background */
+
+    /* Accent / Buttons */
+    --accent-primary: #f5a623; /* oranye hangat */
+    --accent-hover: #e5941f;   /* hover lebih gelap */
+    --accent-light: #ffce7b;   /* highlight ringan / glow */
+
+    /* Text */
+    --text-primary: #2b4a57;   /* biru tua, kontras tapi lembut */
+    --text-light: #f6f5f2;     /* off-white */
+    --text-danger: #f26100;    /* oranye tajam untuk alert/error */
+
+    /* Borders & Shadows */
+    --border-light: #d0e4e8;       /* sesuai palet, harmonis */
+    --shadow-light: rgba(52,89,106,0.08);
+    --shadow-heavy: rgba(52,89,106,0.45);
+    --shadow-inset: rgba(255,255,255,0.05);
+    --table-hover: rgba(245,166,35,0.12);
+    --table-even: rgba(255,255,255,0.03);
+    --table-border: rgba(255,255,255,0.08);
+}

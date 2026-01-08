@@ -127,7 +127,13 @@ public function get_member(Request $request)
         ]);
 
         $member = DB::table('member_id')
-            ->where('id', $request->no_member)
+            ->join('member_bio', 'member_bio.id', '=', 'member_id.id')
+            ->where('member_id.id', $request->no_member)
+            ->select(
+                'member_id.id as id','member_id.point',
+                'member_bio.nama',
+                'member_bio.ttl'
+            )
             ->first();
 
         if (!$member) {
@@ -157,6 +163,7 @@ public function get_member(Request $request)
         ], 500);
     }
 }
+
 
 
 

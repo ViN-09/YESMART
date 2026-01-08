@@ -5,9 +5,13 @@ import {
     bayarTransaksi,
     cekMember
 } from "./API";
+import ButtonRoute from "./ButtonRoute";
+import './Colorpalet.css'
 import "./Cashier.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Struk from "./Struk";
 import Swal from "sweetalert2";
+import ReactDOMServer from "react-dom/server";
 
 function Cashier() {
     const [listSatuan, setListSatuan] = useState([]);
@@ -167,65 +171,92 @@ function Cashier() {
     }
 };
 
+const printStruk = (html) => {
+    const printWindow = window.open("", "_blank", "width=400,height=600");
+
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Struk Pembayaran</title>
+                <style>
+                    body {
+                        font-family: monospace;
+                        font-size: 12px;
+                        padding: 10px;
+                         width: 58mm;
+                    }
+                    hr {
+                        border: 1px dashed #000;
+                    }
+                </style>
+            </head>
+            <body>
+                ${html}
+                <script>
+                    window.onload = function () {
+                        window.print();
+                        window.close();
+                    };
+                </script>
+            </body>
+        </html>
+    `);
+
+    printWindow.document.close();
+};
+
 
     // ===============================
     // PROCESS PAYMENT - Optimized
     // ===============================
     const processPayment = async (payload) => {
         console.log("PAYLOAD BAYAR:", payload);
-        
+    
         try {
             const res = await bayarTransaksi(payload);
-
+    
             if (!res?.status) {
                 throw new Error(res?.message || "Pembayaran gagal");
             }
-
-            // Prepare success message
-            let htmlMessage = `
-                <div style="text-align: left;">
-                    <p><b>Total:</b> Rp ${payload.total.toLocaleString()}</p>
-                    <p><b>Metode:</b> ${payload.pembayaran === 'cash' ? 'Cash' : 
-                                      payload.pembayaran === 'e-money' ? 'E-Money' : 
-                                      'Point'}</p>
-            `;
-
-            if (payload.pembayaran === "cash") {
-                htmlMessage += `
-                    <p><b>Tunai:</b> Rp ${payload.tunai.toLocaleString()}</p>
-                    <p><b>Kembalian:</b> Rp ${payload.kembalian.toLocaleString()}</p>
-                `;
-            } else if (payload.pembayaran === "point") {
-                htmlMessage += `<p><b>Point Digunakan:</b> ${payload.point_dipakai}</p>`;
-            }
-
-            htmlMessage += `</div>`;
-
-            await Swal.fire({
+    
+            const data = res.data;
+    
+            // ⬇️ RENDER STRUK JSX KE HTML STRING
+            const strukHTML = ReactDOMServer.renderToString(
+                <Struk data={data} no_struk={res.no_struk} />
+            );
+    
+            const result = await Swal.fire({
                 icon: "success",
                 title: "Pembayaran Berhasil",
-                html: htmlMessage,
-                confirmButtonText: "OK"
+                html: strukHTML,
+                confirmButtonText: "Cetak Struk"
             });
-
-            // Reset all states
+            
+            if (result.isConfirmed) {
+                printStruk(strukHTML);
+            }
+    
             setCart([]);
             setNo_member(null);
             setForm(prev => ({ ...prev, kode_barcode: "" }));
-
+    
         } catch (err) {
             console.error("ERROR BAYAR:", err);
-            const message = err?.response?.data?.message || err.message || "Terjadi kesalahan saat pembayaran";
-            
+            const message = err?.message || "Terjadi kesalahan saat pembayaran";
+    
             await Swal.fire({
                 icon: "error",
                 title: "Pembayaran Gagal",
                 text: message,
                 confirmButtonText: "OK"
             });
-            throw err; // Re-throw untuk handling di parent function
+    
+            throw err;
         }
     };
+    
+    
 
     // ===============================
     // HANDLE PAYMENT - Major Optimization
@@ -431,7 +462,9 @@ function Cashier() {
     }, [cart.length, isProcessing]);
 
     return (
+        
         <div id="cashier-page">
+            
             {/* HEADER */}
             <div id="header-section">
                 <h1>YESMART</h1>
@@ -615,9 +648,19 @@ function Cashier() {
                     >
                         <i className="bi bi-x-circle"></i> Kosongkan (ESC)
                     </button>
+                    
                 )}
+               
             </div>
+            <div className="direrct-back">
+            <ButtonRoute
+  iconClass="bi bi-arrow-left"
+  textColor="#fff"
+  route="/home_page"
+/>
         </div>
+        </div>
+        
     );
 }
 

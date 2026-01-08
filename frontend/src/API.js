@@ -1,4 +1,4 @@
-const host = "http://localhost:8000/api";
+const host = "http://127.0.0.1:8000/api";
 
 
 // ===============================
@@ -70,7 +70,7 @@ export async function getCashierItem(payload) {
 // CASHIER - Transaksi
 // ===============================
 export async function bayarTransaksi(payload) {
-  const res = await fetch(`${host}/yeslocal/cashier/payment`, {
+  const res = await fetch(`${host}/yeslocal/payment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
