@@ -4,12 +4,12 @@ import {
     getCashierItem,
     bayarTransaksi,
     cekMember
-} from "./API";
-import ButtonRoute from "./ButtonRoute";
+} from "../../API";
+import ButtonRoute from "../../ButtonRoute";
 import './Colorpalet.css'
 import "./Cashier.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import Struk from "./Struk";
+import Struk from "../../Struk";
 import Swal from "sweetalert2";
 import ReactDOMServer from "react-dom/server";
 

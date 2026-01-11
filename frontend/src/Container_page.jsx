@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Login_page from './Login_page'
 import Homepage from './Homepage'
 import Cashier from './Cashier'
+import POSpage from './POSpage'
 
 function Container_page() {
   return (
@@ -22,6 +23,7 @@ function Container_page() {
         <Route path="/" element={<Login_page />} />
         <Route path="/home_page" element={<Homepage />} />
         <Route path="/cashier" element={<Cashier />} />
+        <Route path="/pos-menu" element={<POSpage />} />
       </Routes>
     </div>
   )

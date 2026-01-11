@@ -36,7 +36,7 @@ function Homepage() {
       <div id="menu-box">
         <button  onClick={handleLogout}><i className="bi bi-box-arrow-left"></i></button>
         <button onClick={() => navigate("/cashier")}>Cashier</button>
-        <button>Point-Of-Sale</button>
+        <button onClick={() => navigate("/pos-menu")}>Point-Of-Sale</button>
       </div>
 
     </div>

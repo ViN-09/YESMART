@@ -3,7 +3,7 @@ import './Login_page.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { checkUser } from "./API";
+import { checkUser } from "../../API";
 
 function Login_page() {
   const [showPass, setShowPass] = useState(false);
